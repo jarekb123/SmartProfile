@@ -6,5 +6,5 @@ interface ProfileManager {
 
     fun createProfile(profile: ProfileEntity): ProfileEntity
 
-    fun updateProfile(profileName: String, profileParams: ProfileEntity.() -> Unit)
+    fun updateProfile(profile: ProfileEntity): ProfileEntity
 }
