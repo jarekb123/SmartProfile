@@ -15,4 +15,8 @@ interface LocationService {
      */
     fun getLatestLocation(): LocationEntity?
 
+    /**
+     * Checks if location service is enabled
+     */
+    fun isLocationEnabled(): Boolean
 }
