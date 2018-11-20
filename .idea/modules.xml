@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/SmartProfileApp.iml" filepath="$PROJECT_DIR$/SmartProfileApp.iml" />
+      <module fileurl="file://$PROJECT_DIR$/androidx-dagger/androidx-dagger.iml" filepath="$PROJECT_DIR$/androidx-dagger/androidx-dagger.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://$PROJECT_DIR$/domain/domain.iml" filepath="$PROJECT_DIR$/domain/domain.iml" />
     </modules>

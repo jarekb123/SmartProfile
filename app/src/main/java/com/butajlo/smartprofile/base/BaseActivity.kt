@@ -1,7 +1,7 @@
 package com.butajlo.smartprofile.base
 
 import android.os.Bundle
-import dagger.android.support.DaggerAppCompatActivity
+import com.butajlo.daggerx.DaggerAppCompatActivity
 
 abstract class BaseActivity : DaggerAppCompatActivity() {
 

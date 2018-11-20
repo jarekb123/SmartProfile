@@ -1,7 +1,8 @@
-package com.butajlo.smartprofile
+package com.butajlo.smartprofile.main
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.butajlo.smartprofile.R
 
 class MainActivity : AppCompatActivity() {
 
