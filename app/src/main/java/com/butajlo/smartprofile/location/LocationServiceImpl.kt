@@ -35,7 +35,7 @@ class LocationServiceImpl(
     }
 
     override fun isLocationEnabled(): Boolean {
-        return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+        return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
             locationManager.isLocationEnabled
         } else {
             val isGpsEnabled = locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)
