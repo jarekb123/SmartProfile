@@ -7,7 +7,7 @@ import org.junit.Test
 
 class GetLocationTest {
 
-    val location = LocationEntity(latitude = 0.0f, longitude = 0.0f)
+    val location = LocationEntity(latitude = 0.0, longitude = 0.0)
 
     val locationService = mock<LocationService> {
         on(it.getLatestLocation()).thenReturn(location)
