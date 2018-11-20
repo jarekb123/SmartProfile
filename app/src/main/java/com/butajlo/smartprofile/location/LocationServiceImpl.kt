@@ -11,8 +11,6 @@ class LocationServiceImpl(
     private val locationManager: LocationManager
 ) : LocationService {
 
-    override var isEnabled = true
-
     override fun getLatestLocation(): LocationEntity? {
         return try {
             locationProvider.lastLocation.result?.toEntity()
