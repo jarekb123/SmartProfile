@@ -1,11 +1,14 @@
 package com.butajlo.smartprofile.location
 
 import android.Manifest
+import android.annotation.TargetApi
 import android.content.Context
 import android.content.pm.PackageManager
 import android.location.LocationManager
+import android.os.Build
 import android.util.Log
 import androidx.core.content.PermissionChecker
+import com.butajlo.smartprofile.common.SdkChecker
 import com.butajlo.smartprofile.domain.entity.LocationEntity
 import com.butajlo.smartprofile.domain.service.LocationService
 import com.butajlo.smartprofile.permission.PermissionsManager
@@ -15,7 +18,8 @@ class LocationServiceImpl(
     private val context: Context,
     private val permissionsManager: PermissionsManager,
     private val locationProvider: FusedLocationProviderClient,
-    private val locationManager: LocationManager
+    private val locationManager: LocationManager,
+    private val sdkChecker: SdkChecker
 ) : LocationService {
 
     override var isEnabled = PermissionChecker.checkSelfPermission(
@@ -34,6 +38,18 @@ class LocationServiceImpl(
     }
 
     override fun isLocationEnabled(): Boolean {
-        return locationManager.isLocationEnabled
+        return if (sdkChecker.isCurrentSdkAbove(Build.VERSION_CODES.O)) {
+            locationManager.isLocationEnabled
+        } else {
+            val isGpsEnabled = locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)
+            val isNetworkEnabled = locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER)
+
+            isGpsEnabled || isNetworkEnabled
+        }
+    }
+
+    fun isLocationPermissionsGranted(): Boolean {
+        return permissionsManager.checkPermissions(Manifest.permission.ACCESS_COARSE_LOCATION) ||
+                permissionsManager.checkPermissions(Manifest.permission.ACCESS_FINE_LOCATION)
     }
 }
