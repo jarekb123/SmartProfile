@@ -37,7 +37,7 @@ class LocationServiceImplTest {
     }
 
     @Test(expected = SecurityException::class)
-    fun getLatestLocation_LocationProviderThrowsSecurityException_ShouldReturnNull() {
+    fun getLatestLocation_LocationProviderThrowsSecurityException_ShouldThrowException() {
         whenever(locationProvider.lastLocation.result).thenThrow(SecurityException())
 
         locationService.getLatestLocation()
