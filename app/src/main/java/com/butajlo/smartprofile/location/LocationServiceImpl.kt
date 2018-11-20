@@ -1,15 +1,12 @@
 package com.butajlo.smartprofile.location
 
-import android.Manifest
 import android.location.LocationManager
 import android.os.Build
 import com.butajlo.smartprofile.domain.entity.LocationEntity
 import com.butajlo.smartprofile.domain.service.LocationService
-import com.butajlo.smartprofile.permission.PermissionsManager
 import com.google.android.gms.location.FusedLocationProviderClient
 
 class LocationServiceImpl(
-    private val permissionsManager: PermissionsManager,
     private val locationProvider: FusedLocationProviderClient,
     private val locationManager: LocationManager
 ) : LocationService {
@@ -33,10 +30,5 @@ class LocationServiceImpl(
 
             isGpsEnabled || isNetworkEnabled
         }
-    }
-
-    fun isLocationPermissionsGranted(): Boolean {
-        return permissionsManager.checkPermissions(Manifest.permission.ACCESS_COARSE_LOCATION) ||
-                permissionsManager.checkPermissions(Manifest.permission.ACCESS_FINE_LOCATION)
     }
 }

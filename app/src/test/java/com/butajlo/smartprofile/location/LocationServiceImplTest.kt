@@ -20,14 +20,13 @@ class LocationServiceImplTest {
     }
     private val locationEntity = LocationEntity(latitude = 30.0, longitude = 20.0)
 
-    private val permissionsManager = mock<PermissionsManager>()
     private val lastLocationTask = mock<Task<Location>>()
     private val locationProvider = mock<FusedLocationProviderClient> {
         on(it.lastLocation).thenReturn(lastLocationTask)
     }
     private val locationManager = mock<LocationManager>()
 
-    private val locationService = LocationServiceImpl(permissionsManager, locationProvider, locationManager)
+    private val locationService = LocationServiceImpl(locationProvider, locationManager)
 
     @Test
     fun getLatestLocation_LocationProviderReturnsLocation_CheckReturnValue() {
