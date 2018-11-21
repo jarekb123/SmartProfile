@@ -4,19 +4,20 @@ import android.location.LocationManager
 import android.os.Build
 import com.butajlo.smartprofile.domain.entity.LocationEntity
 import com.butajlo.smartprofile.domain.service.LocationService
+import com.butajlo.smartprofile.rx.task.toSingle
 import com.google.android.gms.location.FusedLocationProviderClient
+import io.reactivex.Single
 
 class LocationServiceImpl(
     private val locationProvider: FusedLocationProviderClient,
     private val locationManager: LocationManager
 ) : LocationService {
 
-    override fun getLatestLocation(): LocationEntity? {
-        return try {
-            locationProvider.lastLocation.result?.toEntity()
-        } catch (se: SecurityException) {
-            throw se
-        }
+    @Throws(SecurityException::class)
+    override fun getLatestLocation(): Single<LocationEntity> {
+        return locationProvider.lastLocation
+            .toSingle()
+            .map { it.toEntity() }
     }
 
     override fun isLocationEnabled(): Boolean {
@@ -24,7 +25,8 @@ class LocationServiceImpl(
             locationManager.isLocationEnabled
         } else {
             val isGpsEnabled = locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)
-            val isNetworkEnabled = locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER)
+            val isNetworkEnabled =
+                locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER)
 
             isGpsEnabled || isNetworkEnabled
         }

@@ -8,6 +8,8 @@ dependencies {
     implementation 'com.thinkinglogic.builder:kotlin-builder-annotation:1.1.0'
     kapt 'com.thinkinglogic.builder:kotlin-builder-processor:1.1.0'
 
+    implementation "io.reactivex.rxjava2:rxjava:$rxjava_version"
+
     testImplementation "com.nhaarman.mockitokotlin2:mockito-kotlin:$mockito_kt_version"
     testImplementation 'junit:junit:4.12'
 }
