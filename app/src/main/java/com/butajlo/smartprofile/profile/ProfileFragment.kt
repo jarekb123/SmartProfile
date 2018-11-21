@@ -4,9 +4,7 @@ import android.Manifest
 import android.content.pm.PackageManager
 import android.os.Bundle
 import android.util.Log
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
 import com.butajlo.smartprofile.R
@@ -39,17 +37,22 @@ class ProfileFragment : BaseFragment() {
         if (requestCode == REQUEST_PERMISSIONS_CODE) {
             if (permissions[0] == Manifest.permission.ACCESS_COARSE_LOCATION
                     && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-
-                val location = viewModel.getLocation()
-                Log.d(javaClass.simpleName, location.toString())
+                logLocation()
             }
         }
     }
 
     private fun checkLocationPermissions() {
-        if (permissionsManager.checkPermissions(Manifest.permission.ACCESS_COARSE_LOCATION)) {
+        if (!permissionsManager.checkPermissions(Manifest.permission.ACCESS_COARSE_LOCATION)) {
             requestPermissions(arrayOf(Manifest.permission.ACCESS_COARSE_LOCATION), REQUEST_PERMISSIONS_CODE)
+        } else {
+            logLocation()
         }
+    }
+
+    private fun logLocation() {
+        val location = viewModel.getCurrentLocation()
+        Log.d(javaClass.simpleName, location.toString())
     }
 
     companion object {

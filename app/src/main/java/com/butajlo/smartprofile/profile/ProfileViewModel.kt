@@ -5,8 +5,8 @@ import com.butajlo.smartprofile.domain.entity.LocationEntity
 import com.butajlo.smartprofile.domain.usecase.GetLocation
 import javax.inject.Inject
 
-class ProfileViewModel @Inject constructor(getLocation: GetLocation) : ViewModel() {
+class ProfileViewModel @Inject constructor(private val getLocation: GetLocation) : ViewModel() {
 
-    fun getLocation(): LocationEntity? = getLocation()
+    fun getCurrentLocation(): LocationEntity? = getLocation()
 
 }

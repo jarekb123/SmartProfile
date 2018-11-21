@@ -9,6 +9,5 @@ import dagger.Module
 abstract class UiModule {
 
     @Binds
-    @ActivityScope
     abstract fun bindViewModelFactory(viewModelFactory: DaggerViewModelFactory): ViewModelProvider.Factory
 }

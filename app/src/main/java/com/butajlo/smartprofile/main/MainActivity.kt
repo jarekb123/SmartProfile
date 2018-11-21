@@ -1,13 +1,9 @@
 package com.butajlo.smartprofile.main
 
-import androidx.appcompat.app.AppCompatActivity
-import android.os.Bundle
 import com.butajlo.smartprofile.R
+import com.butajlo.smartprofile.base.BaseActivity
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : BaseActivity() {
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
-    }
+    override val layoutRes = R.layout.activity_main
 }

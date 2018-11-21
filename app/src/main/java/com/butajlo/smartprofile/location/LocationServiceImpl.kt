@@ -5,10 +5,11 @@ import android.os.Build
 import com.butajlo.smartprofile.domain.entity.LocationEntity
 import com.butajlo.smartprofile.domain.service.LocationService
 import com.google.android.gms.location.FusedLocationProviderClient
+import javax.inject.Inject
 
-class LocationServiceImpl(
-    private val locationProvider: FusedLocationProviderClient,
-    private val locationManager: LocationManager
+class LocationServiceImpl @Inject constructor(
+        private val locationProvider: FusedLocationProviderClient,
+        private val locationManager: LocationManager
 ) : LocationService {
 
     override fun getLatestLocation(): LocationEntity? {

@@ -1,6 +1,6 @@
 package com.butajlo.smartprofile.base
 
-import com.butajlo.smartprofile.ui.UiModule
+import com.butajlo.smartprofile.location.LocationModule
 import dagger.Component
 import dagger.android.AndroidInjector
 import dagger.android.support.AndroidSupportInjectionModule
@@ -10,7 +10,8 @@ import javax.inject.Singleton
 @Component(modules = [
     AndroidSupportInjectionModule::class,
     ActivityBindingModule::class,
-    UiModule::class
+    AppModule::class,
+    LocationModule::class
 ])
 interface AppComponent : AndroidInjector<App> {
 

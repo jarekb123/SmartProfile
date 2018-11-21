@@ -1,6 +1,7 @@
 package com.butajlo.smartprofile.location
 
 import android.content.Context
+import android.location.LocationManager
 import com.butajlo.smartprofile.domain.service.LocationService
 import com.google.android.gms.location.LocationServices
 import dagger.Binds
@@ -21,6 +22,12 @@ abstract class LocationModule {
         @Singleton
         @Provides
         fun provideLocationProvider(context: Context) = LocationServices.getFusedLocationProviderClient(context)
+
+        @JvmStatic
+        @Singleton
+        @Provides
+        fun provideLocationManager(context: Context): LocationManager =
+                context.getSystemService(Context.LOCATION_SERVICE) as LocationManager
     }
 
 }

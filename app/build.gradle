@@ -58,6 +58,11 @@ dependencies {
     // Material Design
     implementation "com.google.android.material:material:$material_version"
 
+    // RxJava (should be replaced by Kotlin coroutines)
+    implementation "io.reactivex.rxjava2:rxjava:$rx_java_version"
+    implementation "io.reactivex.rxjava2:rxandroid:$rx_android_version"
+
+
     // Kotlin Coroutines
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutines_version"
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutines_version"
