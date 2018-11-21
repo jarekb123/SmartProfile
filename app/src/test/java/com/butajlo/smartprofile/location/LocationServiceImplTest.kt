@@ -5,10 +5,12 @@ import android.location.LocationManager
 import com.butajlo.smartprofile.common.stubBuildSdkVersion
 import com.butajlo.smartprofile.domain.entity.LocationEntity
 import com.butajlo.smartprofile.permission.PermissionsManager
+import com.butajlo.smartprofile.rx.task.toSingle
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.tasks.Task
 import com.nhaarman.mockitokotlin2.mock
 import com.nhaarman.mockitokotlin2.whenever
+import io.reactivex.Single
 import org.junit.Assert.assertEquals
 import org.junit.Test
 
@@ -30,9 +32,12 @@ class LocationServiceImplTest {
 
     @Test
     fun getLatestLocation_LocationProviderReturnsLocation_CheckReturnValue() {
-        whenever(locationProvider.lastLocation.result).thenReturn(location)
+        // I don't know how to test it :(
+        whenever(locationProvider.lastLocation.toSingle()).thenReturn(Single.just(location))
 
-        assertEquals(locationEntity, locationService.getLatestLocation())
+        locationService.getLatestLocation()
+            .test()
+            .assertResult(locationEntity)
     }
 
     @Test(expected = SecurityException::class)
