@@ -4,6 +4,7 @@ import com.butajlo.smartprofile.domain.entity.LocationEntity
 import com.butajlo.smartprofile.domain.service.LocationService
 import com.nhaarman.mockitokotlin2.mock
 import io.reactivex.Maybe
+import io.reactivex.Single
 import org.junit.Test
 
 class GetLocationTest {
@@ -11,7 +12,7 @@ class GetLocationTest {
     val location = LocationEntity(latitude = 0.0, longitude = 0.0)
 
     val locationService = mock<LocationService> {
-        on(it.getLatestLocation()).thenReturn(Maybe.just(location))
+        on(it.getLatestLocation()).thenReturn(Single.just(location))
     }
 
     val getLocation = GetLocation(locationService)
