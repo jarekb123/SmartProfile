@@ -4,20 +4,21 @@ import android.location.LocationManager
 import android.os.Build
 import com.butajlo.smartprofile.domain.entity.LocationEntity
 import com.butajlo.smartprofile.domain.service.LocationService
+import com.butajlo.smartprofile.rx.task.toSingle
 import com.google.android.gms.location.FusedLocationProviderClient
 import javax.inject.Inject
+import io.reactivex.Single
 
 class LocationServiceImpl @Inject constructor(
         private val locationProvider: FusedLocationProviderClient,
         private val locationManager: LocationManager
 ) : LocationService {
 
-    override fun getLatestLocation(): LocationEntity? {
-        return try {
-            locationProvider.lastLocation.result?.toEntity()
-        } catch (se: SecurityException) {
-            throw se
-        }
+    @Throws(SecurityException::class)
+    override fun getLatestLocation(): Single<LocationEntity> {
+        return locationProvider.lastLocation
+            .toSingle()
+            .map { it.toEntity() }
     }
 
     override fun isLocationEnabled(): Boolean {

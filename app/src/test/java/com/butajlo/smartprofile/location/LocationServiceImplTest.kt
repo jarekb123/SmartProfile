@@ -5,12 +5,15 @@ import android.location.LocationManager
 import com.butajlo.smartprofile.common.stubBuildSdkVersion
 import com.butajlo.smartprofile.domain.entity.LocationEntity
 import com.butajlo.smartprofile.permission.PermissionsManager
+import com.butajlo.smartprofile.rx.task.toSingle
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.tasks.Task
 import com.nhaarman.mockitokotlin2.mock
 import com.nhaarman.mockitokotlin2.whenever
+import io.reactivex.Single
 import org.junit.Assert.assertEquals
 import org.junit.Test
+import org.powermock.api.mockito.PowerMockito
 
 class LocationServiceImplTest {
 
@@ -27,20 +30,6 @@ class LocationServiceImplTest {
     private val locationManager = mock<LocationManager>()
 
     private val locationService = LocationServiceImpl(locationProvider, locationManager)
-
-    @Test
-    fun getLatestLocation_LocationProviderReturnsLocation_CheckReturnValue() {
-        whenever(locationProvider.lastLocation.result).thenReturn(location)
-
-        assertEquals(locationEntity, locationService.getLatestLocation())
-    }
-
-    @Test(expected = SecurityException::class)
-    fun getLatestLocation_LocationProviderThrowsSecurityException_ShouldThrowException() {
-        whenever(locationProvider.lastLocation.result).thenThrow(SecurityException())
-
-        locationService.getLatestLocation()
-    }
 
     @Test
     fun isLocationEnabled_Sdk27_GpsEnabledNetworkDisabled_ShouldReturnTrue() {
