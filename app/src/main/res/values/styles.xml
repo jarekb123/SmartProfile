@@ -8,4 +8,9 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <style name="ProfileItem" parent="AppTheme">
+        <item name="android:layout_margin">8dp</item>
+        <item name="android:textAppearance">@style/Base.TextAppearance.AppCompat</item>
+    </style>
+
 </resources>

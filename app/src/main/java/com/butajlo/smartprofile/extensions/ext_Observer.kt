@@ -1,4 +1,4 @@
-package com.butajlo.smartprofile.ui
+package com.butajlo.smartprofile.extensions
 
 import androidx.lifecycle.Observer
 

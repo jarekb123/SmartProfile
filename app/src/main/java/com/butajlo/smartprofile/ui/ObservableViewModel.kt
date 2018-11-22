@@ -4,7 +4,7 @@ import androidx.databinding.Observable
 import androidx.databinding.PropertyChangeRegistry
 import androidx.lifecycle.ViewModel
 
-abstract class ObservableViewModel : ViewModel(), Observable {
+open class ObservableViewModel : ViewModel(), Observable {
 
     private val callbacks by lazy { PropertyChangeRegistry() }
 
@@ -21,6 +21,6 @@ abstract class ObservableViewModel : ViewModel(), Observable {
     }
 
     fun notifyPropertyChanged(fieldId: Int) {
-        callbacks.notifyCallbacks(this, fieldId, null)
+        callbacks.notifyChange(this, fieldId)
     }
 }
