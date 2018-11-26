@@ -3,4 +3,7 @@
     <string name="et_profile_name">Profile Name</string>
     <string name="sw_profile_vibrations">Vibrations</string>
     <string name="profile_ringtone_volume">Ringtone</string>
+    <string name="profile_current_location">Current location</string>
+
+    <string name="location_format">%.3f %.3f</string>
 </resources>

@@ -1,11 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:custom="http://schemas.android.com/tools">
+<layout>
 
     <data>
 
         <variable
             name="viewModel"
             type="com.butajlo.smartprofile.profile.ProfileViewModel" />
+
+        <variable
+            name="stateListener"
+            type="com.butajlo.imageswitch.ImageSwitch.OnStateUpdatedListener" />
     </data>
 
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -39,8 +43,33 @@
                 android:layout_height="50dp"
                 android:background="@drawable/shape_circle"
                 android:padding="10dp"
-                custom:checkedImage="@drawable/ic_vibration_white"
-                custom:uncheckedImage="@drawable/ic_vibration_off_white" />
+                app:checkedImage="@drawable/ic_vibration_white"
+                app:stateListener="@{(state) -> viewModel.vibrationsEnabled}"
+                app:uncheckedImage="@drawable/ic_vibration_off_white" />
+
+            <TextView
+                style="@style/ProfileItem"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.2"
+                android:text="@string/profile_ringtone_volume" />
+
+            <SeekBar
+                android:id="@+id/sb_ringtone_volume"
+                style="@style/ProfileItem"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.6"
+                android:onProgressChanged="@{(bar, progress, fromUser) -> viewModel.onRingtoneVolumeChanged(progress, fromUser)}"
+                android:progress="@{viewModel.ringtoneVolume}" />
+
+            <TextView
+                style="@style/ProfileItem"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.1"
+                android:text="@{String.valueOf(viewModel.ringtoneVolume)}"
+                android:textAlignment="center" />
         </LinearLayout>
 
         <LinearLayout
@@ -50,27 +79,18 @@
 
             <TextView
                 style="@style/ProfileItem"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="0.2"
-                android:text="@string/profile_ringtone_volume" />
-
-            <SeekBar
-                android:id="@+id/sb_ringtone_volume"
-                style="@style/ProfileItem"
-                android:layout_width="0dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="0.7"
-                android:onProgressChanged="@{viewModel::onRingtoneVolumeChanged}"
-                android:progress="@{viewModel.ringtoneVolume}" />
+                android:text="@string/profile_current_location" />
 
             <TextView
                 style="@style/ProfileItem"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="0.1"
-                android:text="@{String.valueOf(viewModel.ringtoneVolume)}"
-                android:textAlignment="center" />
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{@string/location_format(viewModel.lat, viewModel.lng)}"
+                app:error=""/>
+
         </LinearLayout>
+
     </LinearLayout>
 </layout>

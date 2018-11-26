@@ -72,7 +72,7 @@ dependencies {
 
     implementation "com.google.android.gms:play-services-location:$location_version"
 
-    implementation 'com.butajlo.imageswitch:image-switch:0.1.3'
+    implementation "com.butajlo.imageswitch:image-switch:0.1.5"
     implementation "com.butajlo.daggerx:dagger-androidx:1.0.0"
 
     testImplementation 'junit:junit:4.12'

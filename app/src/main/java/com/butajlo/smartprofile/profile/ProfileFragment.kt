@@ -51,7 +51,6 @@ class ProfileFragment : BaseFragment() {
 
     private fun logLocation() {
         viewModel.updateCurrentLocation()
-        viewModel.currentLocation().observe(this, Observer { it.logSelf(javaClass.simpleName) })
     }
 
     companion object {
