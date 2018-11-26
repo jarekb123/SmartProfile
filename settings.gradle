@@ -1,1 +1,1 @@
-include ':app', ':domain', ':androidx-dagger'
+include ':app', ':domain'
